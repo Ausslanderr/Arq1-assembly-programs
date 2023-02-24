@@ -1,6 +1,6 @@
 .data
-	frase: .asciiz "Digite um n˙mero inteiro positivo: "
-	resultado: .asciiz "O somatÛrio È: "
+	frase: .asciiz "Digite um n√∫mero inteiro positivo: "
+	resultado: .asciiz "O somat√≥rio √©: "
 .text
 	jal imprimirFrase
 	jal lerInteiro
@@ -13,7 +13,7 @@
 	imprimirFrase:
 		li $v0, 4	# comando para imprimir uma string ou char
 		la $a0, frase	# carrega em $a0 a string frase
-		syscall		# impress„o
+		syscall		# impress√£o
 		jr $ra		# retorna ao chamador
 		
 	lerInteiro:
@@ -23,13 +23,13 @@
 		jr $ra		# retorna ao chamador
 		
 	somatorio:
-		move $a1, $zero	# contador atÈ chegar em n
-		move $v1, $zero # somatÛrio
+		move $a1, $zero	# contador at√© chegar em n
+		move $v1, $zero # somat√≥rio
 		loop:
-			beq $a1, $a0, exit	# se $a1 = $a0, o somatÛrio foi realizado, sai-se do loop
+			beq $a1, $a0, exit	# se $a1 = $a0, o somat√≥rio foi realizado, sai-se do loop
 			
 			addi $a1, $a1, 1	# incremento do contador
-			add $v1, $v1, $a1	# $v1 (somatÛrio) recebe ele + valor atual de $a1
+			add $v1, $v1, $a1	# $v1 (somat√≥rio) recebe ele + valor atual de $a1
 			j loop	# retorno ao loop
 	
 		exit:
@@ -38,9 +38,9 @@
 	imprimirInteiro:
 		li $v0, 4	# comando para imprimir uma string ou char
 		la $a0, resultado	# carrega em $a0 a string frase
-		syscall		# impress„o
+		syscall		# impress√£o
 			
 		li $v0, 1	# imprime um inteiro
-		move $a0, $v1	# $a0 recebe o valor do somatÛrio ($v1)
-		syscall		# impress„o
+		move $a0, $v1	# $a0 recebe o valor do somat√≥rio ($v1)
+		syscall		# impress√£o
 		jr $ra
