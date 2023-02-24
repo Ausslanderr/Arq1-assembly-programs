@@ -1,13 +1,13 @@
 .data
 	msg1: .asciiz "Digite o valor de n: "
 	msg2: .asciiz "Digite um inteiro: "
-	msg3: .asciiz "O resultado È: "
+	msg3: .asciiz "O resultado √©: "
 	espaco: .byte ' '
 .text
 	jal lerN
 	move $s0, $a0	# salva o valor de n em $s0
-	move $t0, $a0	# $t0 ser· decrementado atÈ 0
-	move $s1, $gp	# servir· para salvar na memÛria
+	move $t0, $a0	# $t0 ser√° decrementado at√© 0
+	move $s1, $gp	# servir√° para salvar na mem√≥ria
 	jal loopInteiros
 	jal insertion
 	jal imprimirInteiros
@@ -18,7 +18,7 @@
 lerN:
 	li $v0, 4	# comando para imprimir uma string ou char
 	la $a0, msg1	# carrega em $a0 a string msg1
-	syscall		# impress„o
+	syscall		# impress√£o
 	
 	li $v0, 5	# comando para a leitura de um inteiro
 	syscall		# leitura
@@ -35,7 +35,7 @@ loopInteiros:
 		addi $t0, $t0, -1	# n - 1
 		
 		sw $a0, 0($s1)		# salva o valor do inteiro digitado
-		addi $s1, $s1, 4	# +4 para guardar em outra posiÁ„o
+		addi $s1, $s1, 4	# +4 para guardar em outra posi√ß√£o
 		
 		j loop
 	
@@ -55,21 +55,21 @@ lerInteiro:
 	
 insertion:
 	move $s1, $gp		# restaura o valor de $s1
-	addi $s2, $zero, 1	# vari·vel i
+	addi $s2, $zero, 1	# vari√°vel i
 
 	loop1:
-		slt $t2, $s2, $s0	# se i È menor que n
+		slt $t2, $s2, $s0	# se i √© menor que n
 		beq $t2, $zero, exit1
 		
 		sll $t0, $s2, 2		# 4i
-		add $t0, $t0, $s1	# endereÁo de vet[i]
+		add $t0, $t0, $s1	# endere√ßo de vet[i]
 		lw $s4, 0($t0)		# $s4 (pivo) = vet[i]
 	
 		addi $s3, $s2, -1	# variavel j = i - 1
 	
 	loop2:
 		sll $t1, $s3, 2		# 4j
-		add $t1, $t1, $s1	# endereÁo de vet[j]
+		add $t1, $t1, $s1	# endere√ßo de vet[j]
 	
 		slt $t2, $s3, $zero	# se j >= 0, $t2 = 0
 		bne $t2, $zero, exit2
@@ -96,14 +96,14 @@ imprimirInteiros:
 	la $a0, msg3
 	syscall
 	
-	move $t0, $zero		# $t0 recebe 0, que ir· incrementar atÈ n
+	move $t0, $zero		# $t0 recebe 0, que ir√° incrementar at√© n
 	
 	loopEscrita:
 		beq $t0, $s0, saida	# se $t0 == n, sai do programa
 		
 		li $v0, 1
 		sll $t1, $t0, 2		# 4 * $t0
-		add $t1, $t1, $gp	# endereÁo de vet[4 * $t0]
+		add $t1, $t1, $gp	# endere√ßo de vet[4 * $t0]
 		lw $t2, 0($t1)		# vet[$t0]
 		move $a0, $t2		# move o valor atual para ser impresso na tela
 		syscall
