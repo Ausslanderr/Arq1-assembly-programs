@@ -1,7 +1,7 @@
 .data
 	msg: .asciiz "Digite um inteiro positivo: "
-	msgTrue: .asciiz "O numero digitado é triangular"
-	msgFalse: .asciiz "O numero digitado não é triangular"
+	msgTrue: .asciiz "O numero digitado Ã© triangular"
+	msgFalse: .asciiz "O numero digitado nÃ£o Ã© triangular"
 .text
 	jal imprimirSaudacao
 	jal lerInteiro
@@ -15,7 +15,7 @@
 False:
 	li $v0, 4		# comando para imprimir uma string ou char
 	la $a0, msgFalse	# carrega em $a0 a string msgFalse
-	syscall			# impressão
+	syscall			# impressÃ£o
 	
 	li $v0, 10		# encerra o programa
 	syscall
@@ -48,7 +48,7 @@ triangular:
 		multu $s0, $s1	# num1 * num2
 		mflo $t0
 		multu $t0, $s2	# (num1 * num2) * num3
-		mflo $t0	# supondo que o numero está em 32 bits
+		mflo $t0	# supondo que o numero estÃ¡ em 32 bits
 		
 		bgt $t0, $a0, exit1	# se mult > n, ir para exit1
 		
